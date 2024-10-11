@@ -1,0 +1,83 @@
+﻿@page "/courses/courseList"
+@inject HttpClient Http
+@inject Blazored.LocalStorage.ILocalStorageService localStorage
+@inject ToastService toastService
+
+<h3 style="background-color: gray" class="text-center">Available Courses</h3>
+<div class="row">
+    <div class="col-md-6">
+        <a href='/courses/createCourse' class="btn btn-primary" role="button">
+            <i class="fas fa-plus                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   "></i>
+            Create
+        </a>
+    </div>
+</div>
+@if (@courseList.Count == 0)
+{
+    <p><em>Empty...</em></p>
+}
+@if (!string.IsNullOrWhiteSpace(errorMessage))
+{
+    <p class="text-danger">@errorMessage</p>
+}
+else
+{
+    <table class="table table-striped align-middle table-bordered" style="background-color:darkgray">
+        <thead class="table-success">
+            <tr>
+                <th>ID</th>
+                <th>Course</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in courseList)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.CourseName</td>
+                    <td>
+                        <a href='/courses/editCourse/@item.Id' class="btn btn-outline-dark" role="button">
+                            Edit
+                        </a>
+                        <a href='/courses/deleteCourse/@item.Id' class="btn btn-outline-danger" role="button">
+                            Delete
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    
+}
+
+@code {
+    protected List<Courses> courseList = new();
+    string errorMessage = string.Empty;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var token = await localStorage.GetItemAsync<string>("authToken");
+        if (!string.IsNullOrWhiteSpace(token))
+            Http.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
+        StateHasChanged();
+        await GetCourses();
+    }
+    protected async Task GetCourses()
+    {
+        var response = await Http.GetAsync("api/Course");
+        if (response.IsSuccessStatusCode)
+            courseList = await response.Content.ReadFromJsonAsync<List<Courses>>();
+        else if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
+        {
+            errorMessage = "You have no permission";
+            toastService.ShowToast("You have no permission", ToastLevel.Warning);
+        }
+        else
+        {
+            errorMessage = "Some error occured!!!";
+            toastService.ShowToast("Some error occured!!!", ToastLevel.Error);
+        }
+        
+    }
+}

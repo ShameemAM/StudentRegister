@@ -1,0 +1,63 @@
+﻿@page "/"
+@inject Blazored.LocalStorage.ILocalStorageService localStorage
+@inject NavigationManager navManager
+
+<PageTitle>Student Register</PageTitle>
+
+<div class="container mt-5">
+    <div class="text-center mb-4">
+        <h1>Welcome to Student Record Management</h1>
+        <p class="lead">This application provides a smooth and efficient way to manage student records.</p>
+    </div>
+
+    @if (string.IsNullOrWhiteSpace(token))
+    {
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card mb-4 shadow-sm">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Already have an account?</h5>
+                        <p class="card-text">Please log in to continue.</p>
+                        <a href="/account/loginUser" class="btn btn-dark">Login</a>
+                    </div>
+                </div>
+
+                <div class="card mb-4 shadow-sm">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Don't have an account?</h5>
+                        <p class="card-text">Register to create a new account.</p>
+                        <a href="/account/registerUser" class="btn btn-primary">Register</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card mb-4 shadow-sm">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Logout</h5>
+                        <p class="card-text">Please log out after your use</p>
+                        <button type="submit" class="btn btn-dark" @onclick=Logout>Logout</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@code{
+    private string token = string.Empty;
+    protected override async Task OnInitializedAsync()
+    {
+        token = await localStorage.GetItemAsync<string>("authToken");
+    }
+    private async Task Logout()
+    {
+        // Clear the token from local storage
+        await localStorage.RemoveItemAsync("authToken");
+        await OnInitializedAsync();
+    }
+}

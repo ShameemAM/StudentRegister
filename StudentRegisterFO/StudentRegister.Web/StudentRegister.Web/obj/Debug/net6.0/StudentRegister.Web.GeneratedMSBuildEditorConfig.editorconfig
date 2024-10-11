@@ -1,0 +1,103 @@
+is_global = true
+build_property.TargetFramework = net6.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = StudentRegister.Web
+build_property.RootNamespace = StudentRegister.Web
+build_property.ProjectDir = D:\LearningMaterials\StudentRegister\StudentRegister\StudentRegisterFO\StudentRegister.Web\StudentRegister.Web\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.RazorLangVersion = 6.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = D:\LearningMaterials\StudentRegister\StudentRegister\StudentRegisterFO\StudentRegister.Web\StudentRegister.Web
+build_property._RazorSourceGeneratorDebug = 
+
+[D:/LearningMaterials/StudentRegister/StudentRegister/StudentRegisterFO/StudentRegister.Web/StudentRegister.Web/App.razor]
+build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/LearningMaterials/StudentRegister/StudentRegister/StudentRegisterFO/StudentRegister.Web/StudentRegister.Web/Pages/Account/LoginUser.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWNjb3VudFxMb2dpblVzZXIucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/LearningMaterials/StudentRegister/StudentRegister/StudentRegisterFO/StudentRegister.Web/StudentRegister.Web/Pages/Account/RegisterUser.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWNjb3VudFxSZWdpc3RlclVzZXIucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/LearningMaterials/StudentRegister/StudentRegister/StudentRegisterFO/StudentRegister.Web/StudentRegister.Web/Pages/Courses/CourseList.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ291cnNlc1xDb3Vyc2VMaXN0LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/LearningMaterials/StudentRegister/StudentRegister/StudentRegisterFO/StudentRegister.Web/StudentRegister.Web/Pages/Courses/CreateCourse.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ291cnNlc1xDcmVhdGVDb3Vyc2UucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/LearningMaterials/StudentRegister/StudentRegister/StudentRegisterFO/StudentRegister.Web/StudentRegister.Web/Pages/Courses/DeleteCourse.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ291cnNlc1xEZWxldGVDb3Vyc2UucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/LearningMaterials/StudentRegister/StudentRegister/StudentRegisterFO/StudentRegister.Web/StudentRegister.Web/Pages/Hobby/CreateHobby.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSG9iYnlcQ3JlYXRlSG9iYnkucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/LearningMaterials/StudentRegister/StudentRegister/StudentRegisterFO/StudentRegister.Web/StudentRegister.Web/Pages/Hobby/DeleteHobby.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSG9iYnlcRGVsZXRlSG9iYnkucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/LearningMaterials/StudentRegister/StudentRegister/StudentRegisterFO/StudentRegister.Web/StudentRegister.Web/Pages/Hobby/HobbyList.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSG9iYnlcSG9iYnlMaXN0LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/LearningMaterials/StudentRegister/StudentRegister/StudentRegisterFO/StudentRegister.Web/StudentRegister.Web/Pages/Index.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXgucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/LearningMaterials/StudentRegister/StudentRegister/StudentRegisterFO/StudentRegister.Web/StudentRegister.Web/Pages/Student/DeleteStudent.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU3R1ZGVudFxEZWxldGVTdHVkZW50LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/LearningMaterials/StudentRegister/StudentRegister/StudentRegisterFO/StudentRegister.Web/StudentRegister.Web/Pages/Student/RegisterStudent.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU3R1ZGVudFxSZWdpc3RlclN0dWRlbnQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/LearningMaterials/StudentRegister/StudentRegister/StudentRegisterFO/StudentRegister.Web/StudentRegister.Web/Pages/Student/StudentList.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU3R1ZGVudFxTdHVkZW50TGlzdC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/LearningMaterials/StudentRegister/StudentRegister/StudentRegisterFO/StudentRegister.Web/StudentRegister.Web/Shared/SurveyPrompt.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXFN1cnZleVByb21wdC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/LearningMaterials/StudentRegister/StudentRegister/StudentRegisterFO/StudentRegister.Web/StudentRegister.Web/Shared/Toast.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXFRvYXN0LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/LearningMaterials/StudentRegister/StudentRegister/StudentRegisterFO/StudentRegister.Web/StudentRegister.Web/_Imports.razor]
+build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/LearningMaterials/StudentRegister/StudentRegister/StudentRegisterFO/StudentRegister.Web/StudentRegister.Web/Shared/MainLayout.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE1haW5MYXlvdXQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-nuqnj9iwun
+
+[D:/LearningMaterials/StudentRegister/StudentRegister/StudentRegisterFO/StudentRegister.Web/StudentRegister.Web/Shared/NavMenu.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE5hdk1lbnUucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-uis78rv2h3
+
+[D:/LearningMaterials/StudentRegister/StudentRegister/StudentRegisterFO/StudentRegister.Web/StudentRegister.Web/Pages/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXJyb3IuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/LearningMaterials/StudentRegister/StudentRegister/StudentRegisterFO/StudentRegister.Web/StudentRegister.Web/Pages/_Host.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX0hvc3QuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/LearningMaterials/StudentRegister/StudentRegister/StudentRegisterFO/StudentRegister.Web/StudentRegister.Web/Pages/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX0xheW91dC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 

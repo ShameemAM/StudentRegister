@@ -1,0 +1,85 @@
+﻿@page "/courses/deleteCourse/{Id:int}"
+@inject HttpClient Http
+@inject NavigationManager navigationManager
+@inject Blazored.LocalStorage.ILocalStorageService localStorage
+@inject ToastService toastService
+
+<h2 style="background-color: gray" class="text-center">@($"Delete Course")</h2>
+
+<br />
+
+@if (!string.IsNullOrWhiteSpace(@errorMessage))
+{
+    <p class="text-danger">@errorMessage</p>
+}
+<div class="form-group" style="background-color:burlywood">
+    <h4>Do you want to delete this course?</h4>
+    <table class="table">
+        <tbody>
+            <tr>
+                <td>Id</td>
+                <td>@course.Id</td>
+            </tr>
+            <tr>
+                <td>Course</td>
+                <td>@course.CourseName</td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="form-group">
+        <input type="button" class="btn btn-danger" @onclick="(async () => await RemoveCourse(course.Id))" value="Delete" />
+        <button type="submit" class="btn btn-light" @onclick="Cancel">Cancel</button>
+    </div>
+</div>
+
+
+@code {
+    [Parameter]
+    public int Id { get; set; }
+    public Courses course = new();
+    private string errorMessage = string.Empty;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var token = await localStorage.GetItemAsync<string>("authToken");
+        if (!string.IsNullOrWhiteSpace(token))
+            Http.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
+        var response = await Http.GetAsync($"api/Course/{Id}");
+        if (response.IsSuccessStatusCode)
+            course = await response.Content.ReadFromJsonAsync<Courses>();
+        else if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
+        {
+            errorMessage = "You have no permission";
+            toastService.ShowToast("You have no permission", ToastLevel.Warning);
+        }
+        else
+        {
+            errorMessage = "Some error occured!!!";
+            toastService.ShowToast("Some error occured!!!", ToastLevel.Error);
+        }
+    }
+
+    protected async Task RemoveCourse(int id)
+    {
+        var response = await Http.DeleteAsync($"api/Course/{id}");
+        if (response.IsSuccessStatusCode)
+        {
+            toastService.ShowToast("Deleted successfully", ToastLevel.Success);
+        }
+        else if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
+        {
+            errorMessage = "You have no permission, please login";
+            toastService.ShowToast("You have no permission", ToastLevel.Warning);
+        }
+        else if (!response.IsSuccessStatusCode){
+            errorMessage = "The operation failed to execute";
+            toastService.ShowToast("The operation failed to execute", ToastLevel.Error);
+        }
+        Cancel();
+    }
+
+    public void Cancel()
+    {
+        navigationManager.NavigateTo("/courses/courseList");
+    }
+}

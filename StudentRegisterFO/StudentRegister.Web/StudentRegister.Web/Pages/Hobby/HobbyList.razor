@@ -1,0 +1,79 @@
+﻿@page "/hobby/hobbyList"
+@inject HttpClient Http
+@inject Blazored.LocalStorage.ILocalStorageService localStorage
+@inject ToastService toastService
+
+<h3 style="background-color: gray" class="text-center">Hobbies</h3>
+<div class="row">
+    <div class="col-md-6">
+        <a href='/hobby/createHobby' class="btn btn-primary" role="button">
+            <i class="fas fa-plus"></i>
+            Create
+        </a>
+    </div>
+</div>
+@if (hobbyList.Count == 0)
+{
+    <p><em>Empty...</em></p>
+}
+@if (!string.IsNullOrWhiteSpace(errorMessage))
+{
+    <p class="text-danger">@errorMessage</p>
+}
+else
+{
+    <table class="table table-striped align-middle table-bordered" style="background-color:darkgray">
+        <thead class="table-success">
+            <tr>
+                <th>ID</th>
+                <th>Hobby</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var item in hobbyList)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.Hobbie</td>
+                    <td>
+                        <a href='/hobby/editHobby/@item.Id' class="btn btn-outline-dark" role="button">
+                            Edit
+                        </a>
+                        <a href='/hobby/deleteHobby/@item.Id' class="btn btn-outline-danger" role="button">
+                            Delete
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    protected List<Hobbies> hobbyList = new();
+    private string errorMessage = string.Empty;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var token = await localStorage.GetItemAsync<string>("authToken");
+        if (!string.IsNullOrWhiteSpace(token))
+            Http.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
+        await GetHobbies();
+    }
+    protected async Task GetHobbies()
+    {
+        var response = await Http.GetAsync("api/Hobbies");
+        if (response.IsSuccessStatusCode)
+            hobbyList = await response.Content.ReadFromJsonAsync<List<Hobbies>>();
+        else if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized){
+            errorMessage = "You have no permission";
+            toastService.ShowToast("You have no permission", ToastLevel.Warning);
+        }
+
+        else{
+            errorMessage = "Some error occured!!!";
+            toastService.ShowToast("Some error occured!!!", ToastLevel.Error);
+        }
+    }
+}

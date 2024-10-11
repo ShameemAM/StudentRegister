@@ -1,0 +1,97 @@
+﻿@page "/courses/createCourse"
+@page "/courses/editCourse/{Id:int}"
+@inject HttpClient Http
+@inject NavigationManager navigationManager
+@inject Blazored.LocalStorage.ILocalStorageService localStorage
+@inject ToastService toastService
+
+<h3 style="background-color: gray" class="text-center">@($"{Title} Course")</h3>
+
+@if (!string.IsNullOrWhiteSpace(errorMessage))
+{
+    <p class="text-danger">@errorMessage</p>
+}
+
+<EditForm Model="@course" FormName="Name" OnValidSubmit="SaveCourse" style="background-color:cadetblue">
+    <DataAnnotationsValidator />
+    <hr />
+    <div class="mb-3">
+        <label for="CourseName" class="form-label">Course</label>
+        <div class="col-md-4">
+            <input type="text" @bind-value=course.CourseName />
+            <ValidationMessage For="@(() => course.CourseName)" />
+
+        </div>
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary" >Save</button>
+        <button type="button" class="btn btn-light" @onclick="Cancel">Cancel</button>
+    </div>
+</EditForm>
+
+@code {
+    [Parameter]
+    public int Id { get; set; }
+    protected string Title = "Create";
+    public Courses course = new();
+    private string errorMessage = string.Empty;
+
+    protected override async Task OnParametersSetAsync()
+    {
+        var token = await localStorage.GetItemAsync<string>("authToken");
+        if (!string.IsNullOrWhiteSpace(token))
+            Http.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
+        if (Id != 0)
+        {
+            Title = "Edit";
+            var response = await Http.GetAsync($"api/Course/{Id}");
+            if (response.IsSuccessStatusCode)
+                course = await response.Content.ReadFromJsonAsync<Courses>();
+            else if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
+            {
+                errorMessage = "You have no permission";
+                toastService.ShowToast("You have no permission", ToastLevel.Warning);
+            }
+            else{
+                errorMessage = "Some error occured!!!";
+                toastService.ShowToast("Some error occured!!!", ToastLevel.Error);
+            }
+        }
+    }
+
+    protected async Task SaveCourse()
+    {
+        HttpResponseMessage? response = null;
+        if (course.Id != 0)
+        {
+            response = await Http.PutAsJsonAsync("api/Course", course);
+        }
+        else
+        {
+            response = await Http.PostAsJsonAsync("api/Course", course);
+        }
+        if(response != null)
+        {
+            if (response.IsSuccessStatusCode)
+            {
+                toastService.ShowToast($"Course added successfully", ToastLevel.Success);
+            }
+            else if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
+            {
+                toastService.ShowToast("You have no permission", ToastLevel.Warning);
+                errorMessage = "You have no permission, please login";
+            }
+            else if (!response.IsSuccessStatusCode)
+            {
+                errorMessage = "The operation failed to execute";
+                toastService.ShowToast("The operation failed to execute", ToastLevel.Error);
+            }
+        }
+        Cancel();
+    }
+
+    public void Cancel()
+    {
+        navigationManager.NavigateTo("/courses/courseList");
+    }
+}

@@ -1,0 +1,367 @@
+﻿@page "/student/registerStudent"
+@page "/student/editStudent/{id:int}"
+@using System.Text.RegularExpressions
+@inject HttpClient httpClient
+@inject NavigationManager navManager
+@inject Blazored.LocalStorage.ILocalStorageService localStorage
+@inject ToastService toastService
+
+
+
+
+<h3 style="background-color: gray" class="text-center">Student Registration Form</h3>
+@if (!string.IsNullOrWhiteSpace(errorMessage))
+{
+    <p class="text-danger">@errorMessage</p>
+}
+<EditForm Model="@student" FormName="registerForm" OnValidSubmit="SaveStudent" style="background-color:cadetblue">
+    <ObjectGraphDataAnnotationsValidator />
+    <ValidationSummary />
+    <hr />
+
+    <div class="form-group">
+        <label for="firstName" class="form-label col-4 ms-2">First Name</label>
+        <input type="text" class="col-4" maxlength="30" @bind-value=student.StudentModel.FirstName id="firstName"
+               pattern="^[A-Za-z ]*$" title="alphabet only" />
+        <ValidationMessage For="@(()=> student.StudentModel.FirstName)"></ValidationMessage>
+    </div>
+    <div class="form-group">
+        <label for="lastName" class="form-label col-4 ms-2">Last Name</label>
+        <input type="text" class="col-4" maxlength="30" @bind-value=student.StudentModel.LastName id="lastName"
+               pattern="^[A-Za-z ]+$" title="alphabet only" />
+        <ValidationMessage For="@(()=> student.StudentModel.LastName)"></ValidationMessage>
+    </div>
+    <div class="form-group">
+        <label for="dateOfBirth" class="form-label col-4 ms-2">Date Of Birth</label>
+        <input type="date" class="col-4" @bind-value=student.StudentModel.DateOfBirth id="dateOfBirth" />
+        <ValidationMessage For="@(()=> student.StudentModel.DateOfBirth)"></ValidationMessage>
+    </div>
+    <div class="form-group">
+        <label for="emailId" class="form-label col-4 ms-2">Email Id</label>
+        <input type="email" class="col-4" @bind-value=student.StudentModel.EmailId id="emailId" />
+        <ValidationMessage For="@(()=> student.StudentModel.EmailId)"></ValidationMessage>
+    </div>
+    <div class="form-group">
+        <label for="mobileNumber" class="form-label col-4 ms-2">Mobile Number</label>
+        <input type="text" maxlength="10" class="col-4" @bind-value=student.StudentModel.MobileNumber id="mobileNumber"
+               pattern="^[0-9]*$" title="10 digit number" />
+        <ValidationMessage For="@(()=> student.StudentModel.MobileNumber)"></ValidationMessage>
+    </div>
+    
+    <div class="form-group">
+        <label for="course" class="form-label col-4 ms-2">Gender</label>
+        <InputRadioGroup Name="GenderRadio" @bind-Value="student.StudentModel.Gender" class="form-group">
+            @foreach (var gender in this.genderValues)
+            {
+                <InputRadio id="@gender.Code" class="form-check-input" Value="@gender.Code" />
+                <label class="form-check-label" for="@gender.Code">@gender.Text</label>
+            }
+            <ValidationMessage For="@(()=> student.StudentModel.Gender)"></ValidationMessage>
+        </InputRadioGroup>
+
+    </div>
+    <div class="form-group">
+        <label for="address" class="form-label col-4 ms-2">Address</label>
+        <input type="text" class="col-6" @bind-value=student.StudentModel.Address id="address" />
+        <ValidationMessage For="@(()=> student.StudentModel.Address)"></ValidationMessage>
+    </div>
+    <div class="form-group">
+        <label for="city" class="form-label col-4 ms-2">City</label>
+        <input type="text" class="col-4" @bind-value=student.StudentModel.City id="city"
+               maxlength="30" pattern="^[A-Za-z]+$" title="alphabet only" />
+        <ValidationMessage For="@(()=> student.StudentModel.City)"></ValidationMessage>
+    </div>
+    <div class="form-group">
+        <label for="pinCode" class="form-label col-4 ms-2">PinCode</label>
+        <input type="text" class="col-4" maxlength="6" @bind-value=student.StudentModel.PinCode id="pinCode" />
+        <ValidationMessage For="@(()=> student.StudentModel.PinCode)"></ValidationMessage>
+    </div>
+    <div class="form-group">
+        <label for="state" class="form-label col-4 ms-2">State</label>
+        <input type="text" class="col-4" @bind-value=student.StudentModel.State id="state"
+               maxlength="30" pattern="^[A-Za-z]+$" title="alphabet only" />
+        <ValidationMessage For="@(()=> student.StudentModel.State)"></ValidationMessage>
+    </div>
+    <div class="form-group">
+        <label for="country" class="form-label col-4 ms-2">Country</label>
+        <input type="text" class="col-4" @bind-value=student.StudentModel.Country id="country" />
+        <ValidationMessage For="@(()=> student.StudentModel.Country)"></ValidationMessage>
+    </div>
+    <div class="form-group">
+        <label for="hobby" class="form-label col-4 ms-2">Hobby</label>
+        @foreach (var values in this.hobbyValues)
+        {
+            <label>
+                <input type="checkbox"
+                       name="hobby"
+                       class="col-form-label"
+                       checked="@(student.StudentHobbiesModel.Any(x => x.Hobbie == values.Hobbie))"
+                       @onchange="eventArgs => { CheckboxClicked(values.Hobbie, eventArgs.Value); }" />
+                @values.Hobbie
+            </label>
+        }
+        <label>
+            <input type="checkbox"
+                   name="otherHobbyCB"
+                   class="col-form-label"
+                   disabled="@(String.IsNullOrWhiteSpace(otherHobby))"
+                   checked="@(!String.IsNullOrWhiteSpace(otherHobby))"
+                   @onchange="eventArgs => { CheckboxClicked(otherHobby, eventArgs.Value); }" />
+            Other
+        </label>
+        <input type="text" id="otherHobby" @bind-value="otherHobby" class="form-text" />
+    </div>
+    <div class="label-table-container">
+        <label for="qualification" class="form-label col-4 ms-2">Qualification</label>
+        <div class="table-responsive">
+            <table id="qualification" class="table table-bordered" style="width:100%; height:200px;">
+                <thead>
+                    <tr>
+                        <th>Sl.No</th>
+                        <th>Examination</th>
+                        <th>Board</th>
+                        <th>Percentage</th>
+                        <th>Year of Passing</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Class X</td>
+                        <td>
+                            <input type="text" @bind-value="student.QualificationModel.ClassXBord" class="form-control" />
+                        </td>
+                        <td>
+                            <input type="text" @bind-value="student.QualificationModel.ClassXPercentage" class="form-control" />
+                        </td>
+                        <td>
+                            <input type="text" @bind-value="student.QualificationModel.ClassXYearOfPassing" class="form-control" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Class XII</td>
+                        <td>
+                            <input type="text" @bind-value="student.QualificationModel.ClassXIIBord" class="form-control" />
+                        </td>
+                        <td>
+                            <input type="text" @bind-value="student.QualificationModel.ClassXIIPercentage" class="form-control" />
+                        </td>
+                        <td>
+                            <input type="text" @bind-value="student.QualificationModel.ClassXIIYearOfPassing" class="form-control" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Graduation</td>
+                        <td>
+                            <input type="text" @bind-value="student.QualificationModel.GraduationBord" class="form-control" />
+                        </td>
+                        <td>
+                            <input type="text" @bind-value="student.QualificationModel.GraduationPercentage" class="form-control" />
+                        </td>
+                        <td>
+                            <input type="text" @bind-value="student.QualificationModel.GraduationYearOfPassing" class="form-control" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>Masters</td>
+                        <td>
+                            <input type="text" @bind-value="student.QualificationModel.MastersBord" class="form-control" />
+                        </td>
+                        <td>
+                            <input type="text" @bind-value="student.QualificationModel.MastersPercentage" class="form-control" />
+                        </td>
+                        <td>
+                            <input type="text" @bind-value="student.QualificationModel.MastersYearOfPassing" class="form-control" />
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="course" class="form-label col-4 ms-2">Courses Apllied For</label>
+        <InputRadioGroup Name="CourseRadio" @bind-Value="student.StudentModel.CourseId" class="form-group">
+            @foreach (var course in this.courseList)
+            {
+                <InputRadio id="@course.Id" class="form-check-input" Value="@course.Id" />
+                <label class="form-check-label" for="@course.Id">@course.CourseName</label>
+            }
+            <ValidationMessage For="@(()=> student.StudentModel.CourseId)"></ValidationMessage>
+        </InputRadioGroup>
+        
+    </div>
+
+
+
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Save</button>
+        <button type="button" class="btn btn-light" @onclick="Cancel">Cancel</button>
+    </div>
+</EditForm>
+
+@code {
+    [Parameter]
+    public int Id{ get; set; }
+    private string otherHobby{ get; set; }
+    private Student student = new();
+    private List<HobbiesCheckList> hobbyValues = new();
+    private List<Courses> courseList = new();
+    private string errorMessage = string.Empty;
+    private HttpResponseMessage? response = null;
+    private RadioValues[] genderValues = new[]
+    {
+        new RadioValues{Code=1, Text="Female"},
+        new RadioValues{Code=2, Text="Male"},
+        new RadioValues{Code=3, Text="Other"}
+    };
+
+    protected override async Task OnInitializedAsync()
+    {
+        var token = await localStorage.GetItemAsync<string>("authToken");
+        if (!string.IsNullOrWhiteSpace(token))
+            httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
+
+        //getting courses
+        response = await httpClient.GetAsync("api/Course");
+        if (response.IsSuccessStatusCode)
+            courseList = await response.Content.ReadFromJsonAsync<List<Courses>>();
+        else if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
+        {
+            errorMessage = "You have no permission";
+            toastService.ShowToast("You have no permission", ToastLevel.Warning);
+        }
+
+        else{
+            errorMessage = "Some error occured!!!";
+            toastService.ShowToast("Some error occured!!!", ToastLevel.Error);
+        }
+        //getting hobbies
+        response = await httpClient.GetAsync("api/Hobbies");
+        if (response.IsSuccessStatusCode)
+            hobbyValues = await response.Content.ReadFromJsonAsync<List<HobbiesCheckList>>();
+        else if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized){
+            errorMessage = "You have no permission";
+            toastService.ShowToast("You have no permission", ToastLevel.Warning);
+        }
+        else{
+            errorMessage = "Some error occured!!!";
+            toastService.ShowToast("Some error occured!!!", ToastLevel.Error);
+        }
+        if(Id != 0)
+        {
+            response = await httpClient.GetAsync($"api/Students/{Id}");
+            if (response.IsSuccessStatusCode)
+                student = await response.Content.ReadFromJsonAsync<Student>();
+            else if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
+            {
+                errorMessage = "You have no permission";
+                toastService.ShowToast("You have no permission", ToastLevel.Warning);
+            }
+            else
+            {
+                errorMessage = "Some error occured!!!";
+                toastService.ShowToast("Some error occured!!!", ToastLevel.Error);
+            }
+
+            if (student?.StudentHobbiesModel != null)
+            {
+                otherHobby = student.StudentHobbiesModel?
+                .FirstOrDefault(x => !hobbyValues
+                .Any(y => y.Hobbie == x.Hobbie))?.Hobbie;
+                foreach (var item in hobbyValues)
+                {
+
+                    if (student.StudentHobbiesModel.Any(x => x.Hobbie == item.Hobbie))
+                    {
+                        item.IsChecked = true;
+                    }
+                }
+
+            }
+        }
+    }
+
+    public async Task CheckboxClicked(string aSelectedId, object aChecked)
+    {
+        if ((bool)aChecked)
+        {
+            if(student?.StudentHobbiesModel.Count > 0){
+                if (!student.StudentHobbiesModel.Any(x => x.Hobbie == aSelectedId))
+                {
+                    student.StudentHobbiesModel.Add(new Hobbies { Hobbie = aSelectedId  });
+                }
+            }
+            else
+                student.StudentHobbiesModel.Add(new Hobbies { Hobbie = aSelectedId });
+        }
+        else
+        {
+            if (student?.StudentHobbiesModel.Count > 0)
+            {
+                var hobby = student.StudentHobbiesModel.FirstOrDefault(x => x.Hobbie == aSelectedId );
+                if (hobby != null)
+                {
+                    if (hobby.Id != 0)
+                        await httpClient.DeleteAsync($"api/StudentHobbies/{hobby.Id}");
+                    else
+                        student.StudentHobbiesModel.Remove(student.StudentHobbiesModel.FirstOrDefault(x => x.Hobbie == aSelectedId));
+                }
+            }
+        }
+        StateHasChanged();
+    }
+
+    private async Task SaveStudent()
+    {
+        response = null;
+        var jsonString = Newtonsoft.Json.JsonConvert.SerializeObject(student);
+        if (student?.StudentModel?.Id != 0)
+        {
+            response =  await httpClient.PutAsJsonAsync("api/Students", student);
+        }
+        else
+        {
+            response =  await httpClient.PostAsJsonAsync("api/Students", student);
+        }
+        if (response != null)
+        {
+            if (response.IsSuccessStatusCode)
+            {
+                toastService.ShowToast("Details added successfully", ToastLevel.Success);
+            }
+            else if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
+            {
+                errorMessage = "You have no permission, please login";
+                toastService.ShowToast("You have no permission", ToastLevel.Warning);
+            }
+            else if (!response.IsSuccessStatusCode)
+            {
+                errorMessage = "The operation failed to execute";
+                toastService.ShowToast("The operation failed to execute", ToastLevel.Error);
+            }
+        }
+        Cancel();
+    }
+    private void Cancel()
+    {
+        navManager.NavigateTo("/student/studentList");
+    }
+
+
+    public class RadioValues
+    {
+        public int Code{ get; set; }
+        public string Text { get; set; }
+    }
+    public class HobbiesCheckList
+    {
+        public int Id { get; set; }
+        public string Hobbie { get; set; }
+        public bool IsChecked{ get; set; }
+    }
+}

@@ -1,0 +1,87 @@
+﻿@page "/account/loginUser"
+@using System.ComponentModel.DataAnnotations
+@inject HttpClient httpClient
+@inject NavigationManager navManager
+@inject Blazored.LocalStorage.ILocalStorageService localStorage
+@inject ToastService toastService
+<h3 style="background-color: gray" class="text-center">Please Login</h3>
+@if (!string.IsNullOrWhiteSpace(errorMessage))
+{
+    <p class="text-danger">@errorMessage</p>
+}
+<EditForm Model="@loginUserModel" OnValidSubmit="Login" >
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    <hr />
+    <div class="mb-3">
+        <label for="email" class="form-label">Email ID</label>
+        <div class="col-md-4">
+            <input type="text" @bind-value=loginUserModel.email />
+            <ValidationMessage For="@(() => loginUserModel.email)" />
+        </div>
+    </div>
+    <div class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <div class="col-md-4">
+            <input type="password" maxlength="10" @bind-value=loginUserModel.password />
+            <ValidationMessage For="@(() => loginUserModel.password)" />
+        </div>
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Login</button>
+        <button type="button" class="btn btn-light" @onclick="Cancel">Cancel</button>
+    </div>
+</EditForm>
+
+@code {
+    private Users users =new();
+    private LoginUserModel loginUserModel = new();
+    string errorMessage = string.Empty;
+
+    protected async Task Login()
+    {
+        if (loginUserModel != null)
+        {
+            users.Email = loginUserModel.email;
+            users.Password = loginUserModel.password;
+        }
+        var responce =await httpClient.PostAsJsonAsync("api/Account/Login", users);
+
+        if (responce.IsSuccessStatusCode)
+        {
+            var value = await responce.Content.ReadFromJsonAsync<TokenResponce>();
+            if (!string.IsNullOrWhiteSpace(value?.token)){
+                await localStorage.SetItemAsync("authToken", value.token);
+                toastService.ShowToast("Login successful", ToastLevel.Success);
+                navManager.NavigateTo("/student/studentList");
+            }
+            else{
+                toastService.ShowToast("invalid credentials!!!", ToastLevel.Warning);
+                errorMessage = "invalid credentials!!!";
+                await localStorage.RemoveItemAsync("authToken");
+            }
+        }
+        else
+        {
+            toastService.ShowToast("invalid credentials!!!", ToastLevel.Warning);
+            errorMessage = "invalid credentials!!!";
+            await localStorage.RemoveItemAsync("authToken");
+        }
+    }
+
+    public void Cancel()
+    {
+        navManager.NavigateTo("/");
+    }
+    private class LoginUserModel
+    {
+        [Required]
+        public string email { get; set; }
+        [Required]
+        public string password { get; set; }
+    }
+    private class TokenResponce
+    {
+        public string token { get; set; }
+    }
+}

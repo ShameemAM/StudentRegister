@@ -1,0 +1,94 @@
+﻿@page "/hobby/createHobby"
+@page "/hobby/editHobby/{Id:int}"
+@inject HttpClient Http
+@inject NavigationManager navigationManager
+@inject Blazored.LocalStorage.ILocalStorageService localStorage
+@inject ToastService toastService
+
+<h3 style="background-color: gray" class="text-center">@($"{Title} Hobby")</h3>
+@if (!string.IsNullOrWhiteSpace(errorMessage))
+{
+    <p class="text-danger">@errorMessage</p>
+}
+<EditForm Model="@hobby" FormName="Name" OnValidSubmit="SaveHobby" style="background-color:cadetblue">
+    <DataAnnotationsValidator />
+    <hr />
+    <div class="mb-3">
+        <label for="Hobbie" class="form-label">Hobby</label>
+        <div class="col-md-4">
+            <input type="text" @bind-value=hobby.Hobbie />
+            <ValidationMessage For="@(() => hobby.Hobbie)" />
+
+        </div>
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Save</button>
+        <button type="button" class="btn btn-light" @onclick="Cancel">Cancel</button>
+    </div>
+</EditForm>
+
+@code {
+    [Parameter]
+    public int Id { get; set; }
+    protected string Title = "Create";
+    public Hobbies hobby = new Hobbies();
+    private string errorMessage = string.Empty;
+
+    protected override async Task OnParametersSetAsync()
+    {
+        var token = await localStorage.GetItemAsync<string>("authToken");
+        if (!string.IsNullOrWhiteSpace(token))
+            Http.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
+        if (Id != 0)
+        {
+            Title = "Edit";
+            var response = await Http.GetAsync($"api/Hobbies/{Id}");
+            if (response.IsSuccessStatusCode)
+                hobby = await response.Content.ReadFromJsonAsync<Hobbies>();
+            else if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized){
+                errorMessage = "You have no permission";
+                toastService.ShowToast("You have no permission", ToastLevel.Warning);
+            }
+            else{
+                errorMessage = "Some error occured!!!";
+                toastService.ShowToast("Some error occured!!!", ToastLevel.Error);
+            }
+        }
+    }
+
+    protected async Task SaveHobby()
+    {
+        HttpResponseMessage? response = null;
+        if (hobby.Id != 0)
+        {
+            response = await Http.PutAsJsonAsync("api/Hobbies", hobby);
+        }
+        else
+        {
+            response = await Http.PostAsJsonAsync("api/Hobbies", hobby);
+        }
+        if (response != null)
+        {
+            if (response.IsSuccessStatusCode)
+            {
+                toastService.ShowToast("Hobby added successfully", ToastLevel.Success);
+            }
+            else if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
+            {
+                errorMessage = "You have no permission, please login";
+                toastService.ShowToast("You have no permission", ToastLevel.Warning);
+            }
+            else if (!response.IsSuccessStatusCode)
+            {
+                errorMessage = "The operation failed to execute";
+                toastService.ShowToast("The operation failed to execute", ToastLevel.Error);
+            }
+        }
+        Cancel();
+    }
+
+    public void Cancel()
+    {
+        navigationManager.NavigateTo("/hobby/hobbyList");
+    }
+}
