@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StudentRegister.Infrastructure.Entities
+namespace StudentRegister.Domain.Entities
 {
     public class Hobbies
     {

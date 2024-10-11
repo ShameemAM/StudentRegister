@@ -1,0 +1,16 @@
+D:\LearningMaterials\StudentRegister\StudentRegister\StudentRegister.Services\bin\Debug\net8.0\StudentRegister.Application.deps.json
+D:\LearningMaterials\StudentRegister\StudentRegister\StudentRegister.Services\bin\Debug\net8.0\StudentRegister.Application.dll
+D:\LearningMaterials\StudentRegister\StudentRegister\StudentRegister.Services\bin\Debug\net8.0\StudentRegister.Application.pdb
+D:\LearningMaterials\StudentRegister\StudentRegister\StudentRegister.Services\bin\Debug\net8.0\StudentRegister.Domain.dll
+D:\LearningMaterials\StudentRegister\StudentRegister\StudentRegister.Services\bin\Debug\net8.0\StudentRegister.Domain.pdb
+D:\LearningMaterials\StudentRegister\StudentRegister\StudentRegister.Services\obj\Debug\net8.0\StudentRegister.Application.csproj.AssemblyReference.cache
+D:\LearningMaterials\StudentRegister\StudentRegister\StudentRegister.Services\obj\Debug\net8.0\StudentRegister.Application.GeneratedMSBuildEditorConfig.editorconfig
+D:\LearningMaterials\StudentRegister\StudentRegister\StudentRegister.Services\obj\Debug\net8.0\StudentRegister.Application.AssemblyInfoInputs.cache
+D:\LearningMaterials\StudentRegister\StudentRegister\StudentRegister.Services\obj\Debug\net8.0\StudentRegister.Application.AssemblyInfo.cs
+D:\LearningMaterials\StudentRegister\StudentRegister\StudentRegister.Services\obj\Debug\net8.0\StudentRegister.Application.csproj.CoreCompileInputs.cache
+D:\LearningMaterials\StudentRegister\StudentRegister\StudentRegister.Services\obj\Debug\net8.0\StudentRegister.Application.sourcelink.json
+D:\LearningMaterials\StudentRegister\StudentRegister\StudentRegister.Services\obj\Debug\net8.0\StudentR.9EB1B41D.Up2Date
+D:\LearningMaterials\StudentRegister\StudentRegister\StudentRegister.Services\obj\Debug\net8.0\StudentRegister.Application.dll
+D:\LearningMaterials\StudentRegister\StudentRegister\StudentRegister.Services\obj\Debug\net8.0\refint\StudentRegister.Application.dll
+D:\LearningMaterials\StudentRegister\StudentRegister\StudentRegister.Services\obj\Debug\net8.0\StudentRegister.Application.pdb
+D:\LearningMaterials\StudentRegister\StudentRegister\StudentRegister.Services\obj\Debug\net8.0\ref\StudentRegister.Application.dll

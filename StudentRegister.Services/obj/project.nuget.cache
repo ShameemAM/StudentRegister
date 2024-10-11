@@ -1,8 +1,22 @@
 {
   "version": 2,
-  "dgSpecHash": "UsijCp+5wGA=",
+  "dgSpecHash": "VOlBZYPBNBA=",
   "success": true,
-  "projectFilePath": "D:\\LearningMaterials\\StudentRegister\\StudentRegister\\StudentRegister.Services\\StudentRegister.Services.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "D:\\LearningMaterials\\StudentRegister\\StudentRegister\\StudentRegister.Services\\StudentRegister.Application.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\shameemahammed\\.nuget\\packages\\automapper\\13.0.1\\automapper.13.0.1.nupkg.sha512",
+    "C:\\Users\\shameemahammed\\.nuget\\packages\\fluentvalidation\\11.9.2\\fluentvalidation.11.9.2.nupkg.sha512",
+    "C:\\Users\\shameemahammed\\.nuget\\packages\\fluentvalidation.dependencyinjectionextensions\\11.9.2\\fluentvalidation.dependencyinjectionextensions.11.9.2.nupkg.sha512",
+    "C:\\Users\\shameemahammed\\.nuget\\packages\\mediatr\\12.4.0\\mediatr.12.4.0.nupkg.sha512",
+    "C:\\Users\\shameemahammed\\.nuget\\packages\\mediatr.contracts\\2.0.1\\mediatr.contracts.2.0.1.nupkg.sha512",
+    "C:\\Users\\shameemahammed\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\8.0.0\\microsoft.extensions.dependencyinjection.abstractions.8.0.0.nupkg.sha512",
+    "C:\\Users\\shameemahammed\\.nuget\\packages\\microsoft.extensions.options\\6.0.0\\microsoft.extensions.options.6.0.0.nupkg.sha512",
+    "C:\\Users\\shameemahammed\\.nuget\\packages\\microsoft.extensions.primitives\\6.0.0\\microsoft.extensions.primitives.6.0.0.nupkg.sha512",
+    "C:\\Users\\shameemahammed\\.nuget\\packages\\microsoft.openapi\\1.6.14\\microsoft.openapi.1.6.14.nupkg.sha512",
+    "C:\\Users\\shameemahammed\\.nuget\\packages\\swashbuckle.aspnetcore.annotations\\6.7.3\\swashbuckle.aspnetcore.annotations.6.7.3.nupkg.sha512",
+    "C:\\Users\\shameemahammed\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.7.3\\swashbuckle.aspnetcore.swagger.6.7.3.nupkg.sha512",
+    "C:\\Users\\shameemahammed\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.7.3\\swashbuckle.aspnetcore.swaggergen.6.7.3.nupkg.sha512",
+    "C:\\Users\\shameemahammed\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512"
+  ],
   "logs": []
 }

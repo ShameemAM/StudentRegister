@@ -1,8 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "TI1gg6NZ64o=",
+  "dgSpecHash": "AF3i22mO0EA=",
   "success": true,
-  "projectFilePath": "D:\\LearningMaterials\\StudentRegister\\StudentRegister\\StudentRegister.Infrastructure\\StudentRegister.Infrastructure.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "D:\\LearningMaterials\\StudentRegister\\StudentRegister\\StudentRegister.Infrastructure\\StudentRegister.Domain.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\shameemahammed\\.nuget\\packages\\microsoft.openapi\\1.6.14\\microsoft.openapi.1.6.14.nupkg.sha512",
+    "C:\\Users\\shameemahammed\\.nuget\\packages\\swashbuckle.aspnetcore.annotations\\6.7.3\\swashbuckle.aspnetcore.annotations.6.7.3.nupkg.sha512",
+    "C:\\Users\\shameemahammed\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.7.3\\swashbuckle.aspnetcore.swagger.6.7.3.nupkg.sha512",
+    "C:\\Users\\shameemahammed\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.7.3\\swashbuckle.aspnetcore.swaggergen.6.7.3.nupkg.sha512"
+  ],
   "logs": []
 }

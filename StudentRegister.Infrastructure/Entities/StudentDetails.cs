@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StudentRegister.Infrastructure.Entities
+namespace StudentRegister.Domain.Entities
 {
     public class StudentDetails
     {
@@ -23,7 +23,7 @@ namespace StudentRegister.Infrastructure.Entities
         [Required]
         [MaxLength(50)]
         public string EmailId { get; set; }
-        public int MobileNumber { get; set; }
+        public string MobileNumber { get; set; }
         public int Gender { get; set; }
         public string Address { get; set; }
         [MaxLength(30)]

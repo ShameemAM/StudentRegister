@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "w7BtQZGjK9soQgw2mAugTLcf3Z2GqTROBGnjTWxlKUw=",
+  "Source": "StudentRegister.API",
+  "BasePath": "_content/StudentRegister.API",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

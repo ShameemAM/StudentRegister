@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StudentRegister.Infrastructure.Entities
+namespace StudentRegister.Domain.Entities
 {
     public class Users
     {
@@ -19,5 +19,6 @@ namespace StudentRegister.Infrastructure.Entities
         public string Password { get; set; }
         [Required]
         public string PhoneNumber { get; set; }
+        public string Salt { get; set; }
     }
 }

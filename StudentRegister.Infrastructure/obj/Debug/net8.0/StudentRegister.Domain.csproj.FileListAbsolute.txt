@@ -1,0 +1,13 @@
+D:\LearningMaterials\StudentRegister\StudentRegister\StudentRegister.Infrastructure\bin\Debug\net8.0\StudentRegister.Domain.deps.json
+D:\LearningMaterials\StudentRegister\StudentRegister\StudentRegister.Infrastructure\bin\Debug\net8.0\StudentRegister.Domain.dll
+D:\LearningMaterials\StudentRegister\StudentRegister\StudentRegister.Infrastructure\bin\Debug\net8.0\StudentRegister.Domain.pdb
+D:\LearningMaterials\StudentRegister\StudentRegister\StudentRegister.Infrastructure\obj\Debug\net8.0\StudentRegister.Domain.csproj.AssemblyReference.cache
+D:\LearningMaterials\StudentRegister\StudentRegister\StudentRegister.Infrastructure\obj\Debug\net8.0\StudentRegister.Domain.GeneratedMSBuildEditorConfig.editorconfig
+D:\LearningMaterials\StudentRegister\StudentRegister\StudentRegister.Infrastructure\obj\Debug\net8.0\StudentRegister.Domain.AssemblyInfoInputs.cache
+D:\LearningMaterials\StudentRegister\StudentRegister\StudentRegister.Infrastructure\obj\Debug\net8.0\StudentRegister.Domain.AssemblyInfo.cs
+D:\LearningMaterials\StudentRegister\StudentRegister\StudentRegister.Infrastructure\obj\Debug\net8.0\StudentRegister.Domain.csproj.CoreCompileInputs.cache
+D:\LearningMaterials\StudentRegister\StudentRegister\StudentRegister.Infrastructure\obj\Debug\net8.0\StudentRegister.Domain.sourcelink.json
+D:\LearningMaterials\StudentRegister\StudentRegister\StudentRegister.Infrastructure\obj\Debug\net8.0\StudentRegister.Domain.dll
+D:\LearningMaterials\StudentRegister\StudentRegister\StudentRegister.Infrastructure\obj\Debug\net8.0\refint\StudentRegister.Domain.dll
+D:\LearningMaterials\StudentRegister\StudentRegister\StudentRegister.Infrastructure\obj\Debug\net8.0\StudentRegister.Domain.pdb
+D:\LearningMaterials\StudentRegister\StudentRegister\StudentRegister.Infrastructure\obj\Debug\net8.0\ref\StudentRegister.Domain.dll

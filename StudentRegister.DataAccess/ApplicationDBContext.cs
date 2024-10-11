@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using StudentRegister.Infrastructure.Entities;
+using StudentRegister.Domain.Entities;
 
 namespace StudentRegister.DataAccess
 {
@@ -18,6 +18,7 @@ namespace StudentRegister.DataAccess
         public DbSet<Hobbies> Hobbies { get; set; }
         public DbSet<StudentHobbies> StudentHobbies { get; set; }
         public DbSet<Users> Users { get; set; }
+        public DbSet<Qualification> Qualifications { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

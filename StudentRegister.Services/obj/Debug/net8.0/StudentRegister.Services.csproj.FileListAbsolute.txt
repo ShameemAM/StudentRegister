@@ -1,0 +1,12 @@
+D:\LearningMaterials\StudentRegister\StudentRegister\StudentRegister.Services\bin\Debug\net8.0\StudentRegister.Services.deps.json
+D:\LearningMaterials\StudentRegister\StudentRegister\StudentRegister.Services\bin\Debug\net8.0\StudentRegister.Services.dll
+D:\LearningMaterials\StudentRegister\StudentRegister\StudentRegister.Services\bin\Debug\net8.0\StudentRegister.Services.pdb
+D:\LearningMaterials\StudentRegister\StudentRegister\StudentRegister.Services\obj\Debug\net8.0\StudentRegister.Services.GeneratedMSBuildEditorConfig.editorconfig
+D:\LearningMaterials\StudentRegister\StudentRegister\StudentRegister.Services\obj\Debug\net8.0\StudentRegister.Services.AssemblyInfoInputs.cache
+D:\LearningMaterials\StudentRegister\StudentRegister\StudentRegister.Services\obj\Debug\net8.0\StudentRegister.Services.AssemblyInfo.cs
+D:\LearningMaterials\StudentRegister\StudentRegister\StudentRegister.Services\obj\Debug\net8.0\StudentRegister.Services.csproj.CoreCompileInputs.cache
+D:\LearningMaterials\StudentRegister\StudentRegister\StudentRegister.Services\obj\Debug\net8.0\StudentRegister.Services.sourcelink.json
+D:\LearningMaterials\StudentRegister\StudentRegister\StudentRegister.Services\obj\Debug\net8.0\StudentRegister.Services.dll
+D:\LearningMaterials\StudentRegister\StudentRegister\StudentRegister.Services\obj\Debug\net8.0\refint\StudentRegister.Services.dll
+D:\LearningMaterials\StudentRegister\StudentRegister\StudentRegister.Services\obj\Debug\net8.0\StudentRegister.Services.pdb
+D:\LearningMaterials\StudentRegister\StudentRegister\StudentRegister.Services\obj\Debug\net8.0\ref\StudentRegister.Services.dll
