@@ -13,7 +13,6 @@ namespace StudentRegister.Web.Data
         }
         [ValidateComplexType]
         public StudentDetails? StudentModel { get; set; }
-        [ValidateComplexType]
         public Courses? CourseModel { get; set; }
         [ValidateComplexType]
         public List<Hobbies>? StudentHobbiesModel { get; set; }
